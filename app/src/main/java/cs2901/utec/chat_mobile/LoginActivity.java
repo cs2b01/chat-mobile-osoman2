@@ -1,5 +1,6 @@
 package cs2901.utec.chat_mobile;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -29,10 +30,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    public Activity getActivity(){
+        return this;
+    }
     public void onBtnLoginClicked(View view) {
         // 1. Getting username and password inputs from view
         EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
@@ -61,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                         String message = response.getString("message");
                         if(message.equals("Authorized")) {
                             showMessage("Authenticated");
+
                         }
                         else {
                             showMessage("Wrong username or password");
@@ -78,8 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                     error.printStackTrace();
                     if( error instanceof  AuthFailureError ){
                         showMessage("Unauthorized");
+
                     }
-                    else {
+                        else {
                         showMessage(error.getMessage());
                     }
                 }
